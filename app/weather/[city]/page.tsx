@@ -18,20 +18,18 @@ export default async function WeatherPage({ params }: PageProps) {
   const { city } = await params;
   const cityName = decodeURIComponent(city);
 
-  // const baseUrl =
-  //   process.env.NODE_ENV === "development"
-  //     ? "http://localhost:3000"
-  //     : process.env.VERCEL_URL
-  //     ? `https://${process.env.VERCEL_URL}`
-  //     : "https://pogodka.vercel.app";
+  const baseUrl =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "https://pogodka.vercel.app";
 
   let data: ApiResponse;
-
+  
   try {
     const apiRes = await fetch(
-      `https://pogodka.vercel.app/api/pogoda?city=${encodeURIComponent(
-        cityName
-      )}`,
+      `${baseUrl}/api/pogoda?city=${encodeURIComponent(cityName)}`,
       { cache: "no-store" }
     );
 
